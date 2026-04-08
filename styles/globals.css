@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * CSS custom properties are injected as an inline <style> by app/layout.tsx
+ * from site.config.ts via lib/theme.ts (buildThemeStyleTag).
+ * The values below are fallback defaults for development without a config.
+ * Requirements: 10.2
+ */
+:root {
+  --color-primary: #E07A5F;
+  --color-primary-hover: #C96A4F;
+  --color-secondary: #3D405B;
+  --color-accent: #81B29A;
+  --color-background: #FAFAF8;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F5F5F0;
+  --color-text: #2D2D2D;
+  --color-text-muted: #6B7280;
+  --color-text-on-primary: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+  --radius: 8px;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+/* Dark mode overrides — also injected dynamically from config */
+.dark {
+  --color-background: #1A1A2E;
+  --color-surface: #16213E;
+  --color-surface-hover: #1A2744;
+  --color-text: #E8E8E8;
+  --color-text-muted: #9CA3AF;
+  --color-border: #2D3A5C;
+  --color-border-light: #1E2D4D;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text font-body leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+
+  /* Visible focus outlines for accessibility — Requirements: 17.4 */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better selection color */
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prose overrides for MDX content — Requirements: 10.2 */
+@layer components {
+  .prose {
+    @apply max-w-none;
+    color: var(--color-text);
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    @apply font-heading;
+    color: var(--color-text);
+  }
+
+  .prose a {
+    color: var(--color-primary);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .prose a:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .prose code:not(pre code) {
+    @apply bg-surface rounded px-1.5 py-0.5 text-sm;
+    color: var(--color-text);
+  }
+
+  .prose pre {
+    @apply bg-surface border border-border rounded-theme overflow-x-auto;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-primary pl-4 italic;
+    color: var(--color-text-muted);
+  }
+
+  .prose hr {
+    @apply border-border;
+  }
+
+  .prose table th {
+    @apply bg-surface font-heading;
+  }
+
+  .prose table td,
+  .prose table th {
+    @apply border border-border px-3 py-2;
+  }
+
+  .prose img {
+    @apply rounded-theme;
+  }
+}
+
+/* Animations — wrapped in no-preference per Requirements: 17.7 */
+@media (prefers-reduced-motion: no-preference) {
+  .transition-theme {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Reduced motion — disable all animations for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

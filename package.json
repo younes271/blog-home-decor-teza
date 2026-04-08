@@ -1,0 +1,50 @@
+{
+  "name": "blog-base",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "tsx scripts/validate-posts.ts && tsx scripts/generate-search-index.ts",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "validate-posts": "tsx scripts/validate-posts.ts",
+    "new-post": "tsx scripts/new-post.ts",
+    "generate-search-index": "tsx scripts/generate-search-index.ts",
+    "type-check": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "next": "14.2.29",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "next-mdx-remote": "^5.0.0",
+    "gray-matter": "^4.0.3",
+    "remark-gfm": "^4.0.0",
+    "remark-unwrap-images": "^4.0.0",
+    "rehype-slug": "^6.0.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.14.0",
+    "rehype-external-links": "^3.0.0",
+    "shiki": "^1.0.0",
+    "fuse.js": "^7.0.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.7.2",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20",
+    "tsx": "^4.19.2",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.29",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8",
+    "fast-check": "^3.23.2"
+  }
+}
